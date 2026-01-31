@@ -12,13 +12,21 @@ struct NamesView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.names, id: \.self) { name in
-                Text(name)
+            List {
+                ForEach(viewModel.names, id: \.self) { name in
+                    Text(name)
+                }
+                .onDelete { indexSet in
+                    viewModel.deleteName(at: indexSet)
+                }
+                .onMove { source, destination in
+                    viewModel.moveName(from: source, to: destination)
+                }
             }
             .onAppear() {
                 viewModel.loadNames()
             }
-            .navigationTitle("Add names")
+            .navigationTitle("Random name dropper")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {

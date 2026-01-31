@@ -21,12 +21,20 @@ class NamesViewModel {
         loadNames()
     }
     
-    let availableNames = ["Arjuna", "Bheema", "Dharmaraya", "Nakula", "Sahadeva"]
+    let availableNames = ["Shreyas", "Rohan", "Ram", "Gopal", "Krishna"]
     
     func addRandomName() {
         if let randomName = availableNames.randomElement() {
             names.append(randomName)
         }
+    }
+    
+    func deleteName(at: IndexSet) {
+        names.remove(atOffsets: at)
+    }
+    
+    func moveName(from source: IndexSet, to destination: Int) {
+        names.move(fromOffsets: source, toOffset: destination)
     }
     
     func saveNames() {
